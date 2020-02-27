@@ -1,0 +1,15 @@
+image:
+  - Visual Studio 2019
+
+version: "{build}"
+
+shallow_clone: true
+
+build: off
+
+test_script:
+  - call "build.bat"
+
+artifacts:
+  - path: CPP\7zip\Bundles\Alone\x64\7za.exe
+    name: 7za
