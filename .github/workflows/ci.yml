@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+env:
+  CI: true
+
+jobs:
+  ci:
+    runs-on: windows-latest
+    if: "!contains(github.event.commits[0].message, '[ci skip]') && !contains(github.event.commits[0].message, '[skip ci]')"
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Build
+        run: CALL "build.bat"
+        shell: cmd
+
+      - name: Prepare files
+        run: |
+          mkdir dist
+          cp CPP/7zip/Bundles/Alone/x64/7za.exe dist/
+        shell: bash
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: "jpegoptim-${{ env.JPEGOPTIM_VER }}"
+          path: dist/
+          if-no-files-found: error
