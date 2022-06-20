@@ -11,7 +11,6 @@ env:
 jobs:
   ci:
     runs-on: windows-latest
-    if: "!contains(github.event.commits[0].message, '[ci skip]') && !contains(github.event.commits[0].message, '[skip ci]')"
 
     steps:
       - name: Clone repository
@@ -33,6 +32,6 @@ jobs:
       - name: Upload binary
         uses: actions/upload-artifact@v2
         with:
-          name: "7za_x64_MSVC2019"
+          name: "7za_x64_MSVC2022"
           path: dist/
           if-no-files-found: error

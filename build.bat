@@ -5,12 +5,12 @@ cd /d %~dp0
 
 rem add MSVC in PATH
 call :SubVSPath
-if not exist "%VS_PATH%" echo ERROR: Visual Studio 2019 NOT FOUND! & goto end
+if not exist "%VS_PATH%" echo ERROR: Visual Studio NOT FOUND! & goto end
 
-call "%VS_PATH%\Common7\Tools\vsdevcmd" -arch=amd64
+call "%VS_PATH%\Common7\Tools\VsDevCmd.bat" -arch=amd64
 
 pushd CPP\7zip
-nmake /f makefile NEW_COMPILER=1 MY_STATIC_LINK=1 CPU=AMD64
+nmake /f makefile MY_STATIC_LINK=1 CPU=AMD64 MY_CPU=MY_CPU_AMD64 PLATFORM=x64
 popd
 
 :end
