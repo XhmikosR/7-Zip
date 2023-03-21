@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  CI: true
+  FORCE_COLOR: 2
 
 jobs:
   ci:
@@ -14,7 +14,9 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - name: Add MSVC to PATH
         uses: ilammy/msvc-dev-cmd@v1
@@ -30,7 +32,7 @@ jobs:
         shell: bash
 
       - name: Upload binary
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: "7za_x64_MSVC2022"
           path: dist/
