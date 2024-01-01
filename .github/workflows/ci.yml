@@ -32,7 +32,7 @@ jobs:
         shell: bash
 
       - name: Upload binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: "7za_x64_MSVC2022"
           path: dist/
